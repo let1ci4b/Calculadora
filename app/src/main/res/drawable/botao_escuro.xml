@@ -4,11 +4,11 @@
     >
 
     <corners
-        android:radius="35dp"
+        android:radius="50dp"
         />
 
     <solid
-        android:color="@color/verdao_botao"
+        android:color="@color/fundo_escuro"
         />
 
 </shape>

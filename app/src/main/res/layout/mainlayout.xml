@@ -2,7 +2,26 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
+    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    
+    <TextView
+        android:id="@+id/inputResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="80dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:textColor="@color/fonte_botao_operacao"
+        android:textSize="30dp"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/layoutBotoes"
+        tools:text="TESTEE">
+
+    </TextView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutBotoes"
@@ -10,13 +29,14 @@
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/botao0"
+            android:id="@+id/buttonAllClear"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -25,57 +45,57 @@
             android:text="AC"
             android:textSize="20dp"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/botao1"
-            app:layout_constraintEnd_toStartOf="@+id/botao01"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSeven"
+            app:layout_constraintEnd_toStartOf="@+id/buttonParentheses"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/botao01"
+            android:id="@+id/buttonParentheses"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text="( )"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/botao2"
-            app:layout_constraintEnd_toStartOf="@id/botao02"
-            app:layout_constraintStart_toEndOf="@+id/botao0"
+            android:textColor="@color/fonte_botao_operacao"
+            app:layout_constraintBottom_toTopOf="@id/buttonEight"
+            app:layout_constraintEnd_toStartOf="@id/buttonPercent"
+            app:layout_constraintStart_toEndOf="@+id/buttonAllClear"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/botao02"
+            android:id="@+id/buttonPercent"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text="%"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/botao3"
-            app:layout_constraintEnd_toStartOf="@id/botao03"
-            app:layout_constraintStart_toEndOf="@+id/botao01"
+            android:textColor="@color/fonte_botao_operacao"
+            app:layout_constraintBottom_toTopOf="@id/buttonNine"
+            app:layout_constraintEnd_toStartOf="@id/buttonDivision"
+            app:layout_constraintStart_toEndOf="@+id/buttonParentheses"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/botao03"
+            android:id="@+id/buttonDivision"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text="÷"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/botao4"
+            android:textColor="@color/fonte_botao_operacao"
+            app:layout_constraintBottom_toTopOf="@id/buttonMultiplication"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/botao02"
+            app:layout_constraintStart_toEndOf="@+id/buttonPercent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/botao1"
+            android:id="@+id/buttonSeven"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -83,13 +103,14 @@
             android:background="@drawable/botao_claro"
             android:text="7"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/botao5"
-            app:layout_constraintEnd_toStartOf="@+id/botao2"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/buttonFour"
+            app:layout_constraintEnd_toStartOf="@+id/buttonEight"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/botao0" />
+            app:layout_constraintTop_toBottomOf="@id/buttonAllClear" />
 
         <Button
-            android:id="@+id/botao2"
+            android:id="@+id/buttonEight"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -97,13 +118,14 @@
             android:background="@drawable/botao_claro"
             android:text="8"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao6"
-            app:layout_constraintEnd_toStartOf="@id/botao3"
-            app:layout_constraintStart_toEndOf="@+id/botao1"
-            app:layout_constraintTop_toBottomOf="@id/botao01" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonFive"
+            app:layout_constraintEnd_toStartOf="@id/buttonNine"
+            app:layout_constraintStart_toEndOf="@+id/buttonSeven"
+            app:layout_constraintTop_toBottomOf="@id/buttonParentheses" />
 
         <Button
-            android:id="@+id/botao3"
+            android:id="@+id/buttonNine"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -111,27 +133,28 @@
             android:background="@drawable/botao_claro"
             android:text="9"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao7"
-            app:layout_constraintEnd_toStartOf="@id/botao4"
-            app:layout_constraintStart_toEndOf="@+id/botao2"
-            app:layout_constraintTop_toBottomOf="@id/botao02" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonSix"
+            app:layout_constraintEnd_toStartOf="@id/buttonMultiplication"
+            app:layout_constraintStart_toEndOf="@+id/buttonEight"
+            app:layout_constraintTop_toBottomOf="@id/buttonPercent" />
 
         <Button
-            android:id="@+id/botao4"
+            android:id="@+id/buttonMultiplication"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text="x"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/botao8"
+            android:textColor="@color/fonte_botao_operacao"
+            app:layout_constraintBottom_toTopOf="@id/buttonSubtraction"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/botao3"
-            app:layout_constraintTop_toBottomOf="@id/botao03" />
+            app:layout_constraintStart_toEndOf="@+id/buttonNine"
+            app:layout_constraintTop_toBottomOf="@id/buttonDivision" />
 
         <Button
-            android:id="@+id/botao5"
+            android:id="@+id/buttonFour"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -139,13 +162,14 @@
             android:background="@drawable/botao_claro"
             android:text="4"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao9"
-            app:layout_constraintEnd_toStartOf="@id/botao6"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonOne"
+            app:layout_constraintEnd_toStartOf="@id/buttonFive"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/botao1" />
+            app:layout_constraintTop_toBottomOf="@id/buttonSeven" />
 
         <Button
-            android:id="@+id/botao6"
+            android:id="@+id/buttonFive"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -153,13 +177,14 @@
             android:background="@drawable/botao_claro"
             android:text="5"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao10"
-            app:layout_constraintEnd_toStartOf="@id/botao7"
-            app:layout_constraintStart_toEndOf="@+id/botao5"
-            app:layout_constraintTop_toBottomOf="@id/botao2" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonTwo"
+            app:layout_constraintEnd_toStartOf="@id/buttonSix"
+            app:layout_constraintStart_toEndOf="@+id/buttonFour"
+            app:layout_constraintTop_toBottomOf="@id/buttonEight" />
 
         <Button
-            android:id="@+id/botao7"
+            android:id="@+id/buttonSix"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -167,27 +192,28 @@
             android:background="@drawable/botao_claro"
             android:text="6"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao11"
-            app:layout_constraintEnd_toStartOf="@id/botao8"
-            app:layout_constraintStart_toEndOf="@+id/botao6"
-            app:layout_constraintTop_toBottomOf="@id/botao3" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonThree"
+            app:layout_constraintEnd_toStartOf="@id/buttonSubtraction"
+            app:layout_constraintStart_toEndOf="@+id/buttonFive"
+            app:layout_constraintTop_toBottomOf="@id/buttonNine" />
 
         <Button
-            android:id="@+id/botao8"
+            android:id="@+id/buttonSubtraction"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text="-"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/botao12"
+            android:textColor="@color/fonte_botao_operacao"
+            app:layout_constraintBottom_toTopOf="@id/buttonAddition"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/botao7"
-            app:layout_constraintTop_toBottomOf="@id/botao4" />
+            app:layout_constraintStart_toEndOf="@+id/buttonSix"
+            app:layout_constraintTop_toBottomOf="@id/buttonMultiplication" />
 
         <Button
-            android:id="@+id/botao9"
+            android:id="@+id/buttonOne"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -195,13 +221,14 @@
             android:background="@drawable/botao_claro"
             android:text="1"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao13"
-            app:layout_constraintEnd_toStartOf="@id/botao10"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonZero"
+            app:layout_constraintEnd_toStartOf="@id/buttonTwo"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/botao5" />
+            app:layout_constraintTop_toBottomOf="@id/buttonFour" />
 
         <Button
-            android:id="@+id/botao10"
+            android:id="@+id/buttonTwo"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -209,13 +236,14 @@
             android:background="@drawable/botao_claro"
             android:text="2"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao14"
-            app:layout_constraintEnd_toStartOf="@id/botao11"
-            app:layout_constraintStart_toEndOf="@id/botao9"
-            app:layout_constraintTop_toBottomOf="@id/botao6" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonComma"
+            app:layout_constraintEnd_toStartOf="@id/buttonThree"
+            app:layout_constraintStart_toEndOf="@id/buttonOne"
+            app:layout_constraintTop_toBottomOf="@id/buttonFive" />
 
         <Button
-            android:id="@+id/botao11"
+            android:id="@+id/buttonThree"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
@@ -223,77 +251,83 @@
             android:background="@drawable/botao_claro"
             android:text="3"
             android:textSize="20dp"
-            app:layout_constraintBottom_toTopOf="@id/botao15"
-            app:layout_constraintEnd_toStartOf="@id/botao12"
-            app:layout_constraintStart_toEndOf="@id/botao10"
-            app:layout_constraintTop_toBottomOf="@id/botao7" />
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/buttonResult"
+            app:layout_constraintEnd_toStartOf="@id/buttonAddition"
+            app:layout_constraintStart_toEndOf="@id/buttonTwo"
+            app:layout_constraintTop_toBottomOf="@id/buttonSix" />
 
         <Button
-            android:id="@+id/botao12"
+            android:id="@+id/buttonAddition"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text="+"
             android:textSize="20dp"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@id/botao16"
+            android:textColor="@color/fonte_botao_operacao"
+            app:layout_constraintBottom_toTopOf="@id/buttonResult"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/botao11"
-            app:layout_constraintTop_toBottomOf="@id/botao8" />
+            app:layout_constraintStart_toEndOf="@id/buttonThree"
+            app:layout_constraintTop_toBottomOf="@id/buttonSubtraction" />
 
         <Button
-            android:id="@+id/botao13"
+            android:id="@+id/buttonZero"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text="0"
             android:textSize="20dp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/botao14"
+            app:layout_constraintEnd_toStartOf="@id/buttonComma"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/botao9" />
+            app:layout_constraintTop_toBottomOf="@id/buttonOne" />
 
         <Button
-            android:id="@+id/botao14"
+            android:id="@+id/buttonComma"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
-            android:background="@drawable/botao_escuro"
+            android:background="@drawable/botao_claro"
             android:text=","
             android:textSize="20dp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/botao15"
-            app:layout_constraintStart_toEndOf="@id/botao13"
-            app:layout_constraintTop_toBottomOf="@id/botao10" />
+            app:layout_constraintEnd_toStartOf="@id/buttonResult"
+            app:layout_constraintStart_toEndOf="@id/buttonZero"
+            app:layout_constraintTop_toBottomOf="@id/buttonTwo" />
 
         <Button
-            android:id="@+id/botao15"
-            android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/botao_escuro"
-            android:text="-"
-            android:textSize="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/botao16"
-            app:layout_constraintStart_toEndOf="@id/botao14"
-            app:layout_constraintTop_toBottomOf="@id/botao11" />
-
-        <Button
-            android:id="@+id/botao16"
+            android:id="@+id/buttonResult"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:background="@drawable/botao_escuro"
             android:text="="
-            android:textSize="20dp"
             android:textColor="@color/white"
+            android:textSize="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/botao15"
-            app:layout_constraintTop_toBottomOf="@id/botao12" />
+            app:layout_constraintStart_toStartOf="@id/buttonThree"
+            app:layout_constraintHorizontal_bias="1.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/icon_backspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/icon_backspace"
+        app:layout_constraintBottom_toTopOf="@+id/layoutBotoes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintVertical_bias="1.0">
+
+    </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

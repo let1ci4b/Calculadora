@@ -7,6 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="verdinho_botao">#a3b18a</color>
-    <color name="verdao_botao">#283618</color>
+    <color name="fundo_botao">#202020</color>
+    <color name="fonte_botao_operacao">#38b000</color>
+    <color name="background">#000000</color>
+    <color name="fundo_escuro">#38b000</color>
+
 </resources>
