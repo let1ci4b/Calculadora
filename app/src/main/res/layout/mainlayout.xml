@@ -7,6 +7,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     
     <TextView
+        android:id="@+id/inputExpression"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/fonte_botao_operacao"
+        android:textSize="30dp"
+        android:textAlignment="textEnd"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/inputResult"
+        tools:text="TESTEE">
+
+    </TextView>
+
+    <TextView
         android:id="@+id/inputResult"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -14,7 +31,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
         android:textColor="@color/fonte_botao_operacao"
-        android:textSize="30dp"
+        android:textSize="20dp"
         android:textAlignment="textEnd"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
