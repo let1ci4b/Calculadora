@@ -63,20 +63,20 @@
             android:textSize="20dp"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/buttonSeven"
-            app:layout_constraintEnd_toStartOf="@+id/buttonParentheses"
+            app:layout_constraintEnd_toStartOf="@+id/buttonChangeSymbol"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/buttonParentheses"
+            android:id="@+id/buttonChangeSymbol"
             android:layout_width="0dp"
             android:layout_height="80dp"
             android:layout_marginEnd="5dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/botao_claro"
-            android:text="( )"
-            android:textSize="20dp"
+            android:text="+/-"
             android:textColor="@color/fonte_botao_operacao"
+            android:textSize="20dp"
             app:layout_constraintBottom_toTopOf="@id/buttonEight"
             app:layout_constraintEnd_toStartOf="@id/buttonPercent"
             app:layout_constraintStart_toEndOf="@+id/buttonAllClear"
@@ -94,7 +94,7 @@
             android:textColor="@color/fonte_botao_operacao"
             app:layout_constraintBottom_toTopOf="@id/buttonNine"
             app:layout_constraintEnd_toStartOf="@id/buttonDivision"
-            app:layout_constraintStart_toEndOf="@+id/buttonParentheses"
+            app:layout_constraintStart_toEndOf="@+id/buttonChangeSymbol"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
@@ -139,7 +139,7 @@
             app:layout_constraintBottom_toTopOf="@id/buttonFive"
             app:layout_constraintEnd_toStartOf="@id/buttonNine"
             app:layout_constraintStart_toEndOf="@+id/buttonSeven"
-            app:layout_constraintTop_toBottomOf="@id/buttonParentheses" />
+            app:layout_constraintTop_toBottomOf="@id/buttonChangeSymbol" />
 
         <Button
             android:id="@+id/buttonNine"

@@ -1,10 +1,9 @@
 package com.example.calculadora
 
 import android.os.Bundle
-import android.view.View
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
-import androidx.annotation.MainThread
 import com.example.calculadora.databinding.MainlayoutBinding
 import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
@@ -13,6 +12,7 @@ class Main : ComponentActivity() {
 
     private lateinit var binding: MainlayoutBinding
     private var calculateExpression: String = ""
+    private var isResult: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,82 +24,107 @@ class Main : ComponentActivity() {
     private fun onClick() {
         with(binding){
 
-            buttonZero.setOnClickListener { insert("0", false, false) }
-            buttonOne.setOnClickListener { insert("1", false, false) }
-            buttonTwo.setOnClickListener { insert("2", false, false) }
-            buttonThree.setOnClickListener { insert("3", false, false) }
-            buttonFour.setOnClickListener { insert("4", false, false) }
-            buttonFive.setOnClickListener { insert("5", false, false) }
-            buttonSix.setOnClickListener { insert("6", false, false) }
-            buttonSeven.setOnClickListener { insert("7", false, false) }
-            buttonEight.setOnClickListener { insert("8", false, false) }
-            buttonNine.setOnClickListener { insert("9", false, false) }
-            buttonComma.setOnClickListener { insert(".", false, false) }
+            buttonZero.setOnClickListener { insert("0", false) }
+            buttonOne.setOnClickListener { insert("1", false) }
+            buttonTwo.setOnClickListener { insert("2", false) }
+            buttonThree.setOnClickListener { insert("3", false) }
+            buttonFour.setOnClickListener { insert("4", false) }
+            buttonFive.setOnClickListener { insert("5", false) }
+            buttonSix.setOnClickListener { insert("6", false) }
+            buttonSeven.setOnClickListener { insert("7", false) }
+            buttonEight.setOnClickListener { insert("8", false) }
+            buttonNine.setOnClickListener { insert("9", false) }
 
-            buttonAddition.setOnClickListener { insert("+", true, false) }
-            buttonDivision.setOnClickListener { insert("÷", true, false) }
-            buttonMultiplication.setOnClickListener { insert("x", true, false) }
-            buttonSubtraction.setOnClickListener { insert("-", true, false) }
-            buttonParentheses.setOnClickListener { insert("(", true, false) }
-            buttonPercent.setOnClickListener { insert("%", true, false) }
+            buttonComma.setOnClickListener { insert(".", true) }
+            buttonAddition.setOnClickListener { insert("+", true) }
+            buttonDivision.setOnClickListener { insert("÷", true) }
+            buttonMultiplication.setOnClickListener { insert("x", true) }
+            buttonSubtraction.setOnClickListener { insert("-", true) }
+            buttonChangeSymbol.setOnClickListener { changeMathSymbol() }
+            buttonPercent.setOnClickListener { insert("%", true) }
             buttonAllClear.setOnClickListener { clear() }
-            buttonResult.setOnClickListener { insert(binding.inputResult.text.toString(), true, true) }
+            buttonResult.setOnClickListener { showResult(binding.inputResult.text.toString()) }
             iconBackspace.setOnClickListener { backspace() }
         }
     }
 
-    private fun clear() {
+    private fun clear() { // limpando os campos
         binding.inputResult.text = ""
         binding.inputExpression.text = ""
     }
 
-    private fun insert(num: String, specialCharacter: Boolean, result: Boolean) {
+    private fun insert(num: String, specialCharacter: Boolean) { // montando expressao
         with(binding) {
 
-            var expression = inputExpression.text.toString() + num
-
             if (specialCharacter) {
-                inputResult.text = ""
-                inputExpression.text = expression
-            } else if(result) {
+                if (lastCharacterIsSpecial()) backspace() // substituindo caracter especial pelo digitado anteriormente
+                else if(isResult) isResult = false
+                inputExpression.text = inputExpression.text.toString() + num
+            } else if(isResult == true) { // limpando o campo expressão após exibir o resultado oficial
                 inputExpression.text = num
-                inputResult.text = ""
-            }else{
-                inputExpression.text = expression
+                isResult = false
+            } else {
+                inputExpression.text = inputExpression.text.toString() + num
                 calculate()
             }
         }
     }
 
-    private fun backspace() {
-        var numero = binding.inputExpression.text.toString()
+    private fun changeMathSymbol() {
+        var campoExpressao = binding.inputExpression.text.toString()
+        var addSymbol = false
+        var changeSymbol = false
+        var position = 0
 
-        if(numero.length > 0) {
-            binding.inputExpression.text = numero.substring(0, numero.length - 1)
+        for (i in campoExpressao.length - 1 downTo 0) { // varrendo a expressão de trás pra frente
+            if (campoExpressao[i] == '%' || campoExpressao[i] == '÷' || campoExpressao[i] == 'x') {
+                addSymbol = true
+                position = i
+                break
+            } else if(campoExpressao[i] == '-' || campoExpressao[i] == '+') {
+                changeSymbol = true
+                position = i
+                break
+            }
+        }
+
+        if (addSymbol && !lastCharacterIsSpecial()){
+            val expressionBuilder = StringBuilder(campoExpressao)
+            binding.inputExpression.text = expressionBuilder.insert(position + 1, '-')
+            calculate()
+        } else if(changeSymbol && !lastCharacterIsSpecial()) {
+            var symbol = if (campoExpressao[position] == '+') "-" else  "+"
+            binding.inputExpression.text = campoExpressao.replaceRange(position, position + 1, symbol)
             calculate()
         }
     }
 
-    private fun calculate() {
-        if (convertExpressionToCalculate() != null && convertExpressionToCalculate().length > 0) {
-            var expressionSize = convertExpressionToCalculate().length
+    private fun backspace() { // exclui o último digito da expressão
+        var campoExpressao = binding.inputExpression.text.toString()
 
-            if (!convertExpressionToCalculate().substring(expressionSize - 1, expressionSize).matches(Regex("[0-9]*")) || convertExpressionToCalculate().matches(Regex("[0-9]*"))) { // se toda a string e numero ou se seu ultimo digito nao e um numero
-                    binding.inputResult.text = ""
-            } else{
+        if(campoExpressao.length > 0) {
+            binding.inputExpression.text = campoExpressao.substring(0, campoExpressao.length - 1)
+            calculate()
+        }
+    }
+
+    private fun calculate() { // calculando em tempo real
+        try {
+            if (lastCharacterIsSpecial() || expressionIsOnlyNumber()) { // checando se deve mostrar o resultado
+                binding.inputResult.text = ""
+            } else { // calculando a expressao
                 val expression: Expression =
                     ExpressionBuilder(convertExpressionToCalculate()).build()
                 val resultado: Double = expression.evaluate();
                 val longResult: Long = resultado.toLong()
 
-                if (resultado == longResult.toDouble()) {
-                    binding.inputResult.text = longResult.toString() // resultado sem virgula
-                } else {
-                    binding.inputResult.text = resultado.toString()
-                }
+                binding.inputResult.text = if (resultado == longResult.toDouble()) longResult.toString() else resultado.toString()
             }
+        } catch (e: Exception){
+            Log.i("", "Formato inválido.")
+        } finally {
+            showExpression()
         }
-        showExpression()
     }
 
     private fun showExpression() { // mostrando os caracteres especiais bonitinhos
@@ -122,4 +147,31 @@ class Main : ComponentActivity() {
         return calculateExpression
     }
 
+    private fun showResult(result: String) { // mostrando o resultado no campo da expressão
+        if (result.isNotEmpty()) {
+            binding.inputExpression.text = result
+            binding.inputResult.text = ""
+            isResult = true
+        } else Toast.makeText(this@Main, "Formato inválido.", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun lastCharacterIsSpecial() : Boolean { // checando se o último caractere é especial
+        var isSpecial = false
+
+        if (convertExpressionToCalculate().isNotEmpty()) {
+            var expressionSize = convertExpressionToCalculate().length
+            if (!convertExpressionToCalculate().substring(expressionSize - 1, expressionSize).matches(Regex("[0-9]*"))) return true
+        }
+        return isSpecial
+    }
+
+    private fun expressionIsOnlyNumber() : Boolean { // checando se a expressão é apenas um número
+        var isSpecial = false
+
+        if (convertExpressionToCalculate().isNotEmpty()) {
+            var expressionSize = convertExpressionToCalculate().length
+            if (convertExpressionToCalculate().substring(1, expressionSize).matches(Regex("[0-9.]*"))) return true
+        }
+        return isSpecial
+    }
 }
