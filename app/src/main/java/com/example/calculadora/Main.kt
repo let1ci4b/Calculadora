@@ -60,7 +60,7 @@ class Main : ComponentActivity() {
                 if (lastCharacterIsSpecial()) backspace() // substituindo caracter especial pelo digitado anteriormente
                 else if(isResult) isResult = false
                 inputExpression.text = inputExpression.text.toString() + num
-            } else if(isResult == true) { // limpando o campo expressão após exibir o resultado oficial
+            } else if(isResult) { // limpando o campo expressão após exibir o resultado oficial
                 inputExpression.text = num
                 isResult = false
             } else {
@@ -71,17 +71,17 @@ class Main : ComponentActivity() {
     }
 
     private fun changeMathSymbol() {
-        var campoExpressao = binding.inputExpression.text.toString()
+        val inputExpression = binding.inputExpression.text.toString()
         var addSymbol = false
         var changeSymbol = false
         var position = 0
 
-        for (i in campoExpressao.length - 1 downTo 0) { // varrendo a expressão de trás pra frente
-            if (campoExpressao[i] == '%' || campoExpressao[i] == '÷' || campoExpressao[i] == 'x') {
+        for (i in inputExpression.length - 1 downTo 0) { // varrendo a expressão de trás pra frente
+            if (inputExpression[i] == '%' || inputExpression[i] == '÷' || inputExpression[i] == 'x') {
                 addSymbol = true
                 position = i
                 break
-            } else if(campoExpressao[i] == '-' || campoExpressao[i] == '+') {
+            } else if(inputExpression[i] == '-' || inputExpression[i] == '+') {
                 changeSymbol = true
                 position = i
                 break
@@ -89,21 +89,21 @@ class Main : ComponentActivity() {
         }
 
         if (addSymbol && !lastCharacterIsSpecial()){
-            val expressionBuilder = StringBuilder(campoExpressao)
+            val expressionBuilder = StringBuilder(inputExpression)
             binding.inputExpression.text = expressionBuilder.insert(position + 1, '-')
             calculate()
         } else if(changeSymbol && !lastCharacterIsSpecial()) {
-            var symbol = if (campoExpressao[position] == '+') "-" else  "+"
-            binding.inputExpression.text = campoExpressao.replaceRange(position, position + 1, symbol)
+            val symbol = if (inputExpression[position] == '+') "-" else  "+"
+            binding.inputExpression.text = inputExpression.replaceRange(position, position + 1, symbol)
             calculate()
         }
     }
 
     private fun backspace() { // exclui o último digito da expressão
-        var campoExpressao = binding.inputExpression.text.toString()
+        val inputExpression = binding.inputExpression.text.toString()
 
-        if(campoExpressao.length > 0) {
-            binding.inputExpression.text = campoExpressao.substring(0, campoExpressao.length - 1)
+        if(inputExpression.isNotEmpty()) {
+            binding.inputExpression.text = inputExpression.substring(0, inputExpression.length - 1)
             calculate()
         }
     }
@@ -115,7 +115,7 @@ class Main : ComponentActivity() {
             } else { // calculando a expressao
                 val expression: Expression =
                     ExpressionBuilder(convertExpressionToCalculate()).build()
-                val resultado: Double = expression.evaluate();
+                val resultado: Double = expression.evaluate()
                 val longResult: Long = resultado.toLong()
 
                 binding.inputResult.text = if (resultado == longResult.toDouble()) longResult.toString() else resultado.toString()
@@ -159,7 +159,7 @@ class Main : ComponentActivity() {
         var isSpecial = false
 
         if (convertExpressionToCalculate().isNotEmpty()) {
-            var expressionSize = convertExpressionToCalculate().length
+            val expressionSize = convertExpressionToCalculate().length
             if (!convertExpressionToCalculate().substring(expressionSize - 1, expressionSize).matches(Regex("[0-9]*"))) return true
         }
         return isSpecial
@@ -169,7 +169,7 @@ class Main : ComponentActivity() {
         var isSpecial = false
 
         if (convertExpressionToCalculate().isNotEmpty()) {
-            var expressionSize = convertExpressionToCalculate().length
+            val expressionSize = convertExpressionToCalculate().length
             if (convertExpressionToCalculate().substring(1, expressionSize).matches(Regex("[0-9.]*"))) return true
         }
         return isSpecial
