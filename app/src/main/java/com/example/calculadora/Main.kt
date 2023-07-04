@@ -19,6 +19,8 @@ class Main : ComponentActivity() {
         binding = MainlayoutBinding.inflate(layoutInflater)
         setContentView(binding.root)
         onClick()
+
+        val test = binding
     }
 
     private fun onClick() {
