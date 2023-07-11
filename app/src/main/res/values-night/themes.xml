@@ -3,7 +3,7 @@
     <style name="Theme.Calculadora" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryDark">@color/fonte_botao_operacao</item>
+        <item name="colorPrimaryDark">@color/background</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
@@ -11,7 +11,7 @@
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/fonte_botao_operacao</item>
+        <item name="android:statusBarColor">@color/background</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
