@@ -1,29 +1,32 @@
 package com.example.calculadora
 
+import android.util.Log
 import androidx.core.text.isDigitsOnly
 
-class Expression(){
-    var calculateExpression: String = ""
+class Expression {
+    var fieldExpression: String = ""
+    var fieldResult: String = ""
 
-    fun isSpecialCharacter(value: String) : Boolean {
+    fun isSpecialCharacter(value: String): Boolean {
         return !value.isDigitsOnly()
     }
 
-    fun lastCharacterIsSpecial() : Boolean { // checando se o último caractere é especial
-        val isSpecial =
-
-        if (calculateExpression.isNotEmpty()) if (calculateExpression.last().isDigit()) false else true
+    fun lastCharacterIsSpecial(): Boolean {
+        return if(fieldExpression.isNotEmpty()) !fieldExpression.last().isDigit()
         else false
-
-        return isSpecial
     }
 
-    fun isOnlyNumber() : Boolean { // checando se a expressão é apenas um número
-        var isSpecial =
+    fun isOnlyNumber(): Boolean {
+        return if (fieldExpression.isNotEmpty()) fieldExpression.substring(0, fieldExpression.length).matches(Regex("[0-9].+"))
+        else return false
+    }
 
-        if (calculateExpression.isNotEmpty()) if (calculateExpression.substring(1, calculateExpression.length).isDigitsOnly()) true else false
-        else false
+    fun convertExpressionToCalculate(): String {
+        val division = DIVISION.toString()
+        val multiplication = MULTIPLICATION.toString()
+        val percent = PERCENT.toString()
 
-        return isSpecial
+        return fieldExpression.replace(multiplication, "*").replace(division, "/")
+            .replace(percent, "/100*")
     }
 }

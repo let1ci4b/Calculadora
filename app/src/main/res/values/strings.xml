@@ -8,7 +8,7 @@
     <string name="button_subtraction">-</string>
     <string name="button_addition">+</string>
     <string name="button_result">=</string>
-    <string name="button_comma">,</string>
+    <string name="button_comma">.</string>
     <string name="button_zero">0</string>
     <string name="button_one">1</string>
     <string name="button_two">2</string>
