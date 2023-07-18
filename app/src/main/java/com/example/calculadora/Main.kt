@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import com.example.calculadora.databinding.MainlayoutBinding
 import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
+import java.lang.Exception
 
 class Main : ComponentActivity() {
 
@@ -153,8 +154,9 @@ class Main : ComponentActivity() {
                 val longResult: Long = result.toLong()
                 expression.fieldResult = if (result == longResult.toDouble()) longResult.toString() else result.toString()
             }
-        } catch (e: IllegalArgumentException) {
-            Log.i("", "Formato de operação inválido!")
+        } catch (e: Exception) {
+            if(e is ArithmeticException) Toast.makeText(this@Main, "Operação inválida.", Toast.LENGTH_SHORT).show()
+            else Log.i("", "Formato de operação inválido!")
         } finally {
             binding.inputResult.text = expression.fieldResult
         }
