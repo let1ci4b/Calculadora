@@ -7,12 +7,11 @@ import androidx.activity.ComponentActivity
 import com.example.calculadora.databinding.MainlayoutBinding
 import net.objecthunter.exp4j.Expression
 import net.objecthunter.exp4j.ExpressionBuilder
-import kotlin.math.exp
 
 class Main : ComponentActivity() {
 
     private lateinit var binding: MainlayoutBinding
-    var isResult: Boolean = false
+    private var isResult: Boolean = false
     private var expression = Expression()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,22 +24,8 @@ class Main : ComponentActivity() {
     private fun setupListeners() {
         with(binding) {
             val buttons = listOf(
-                buttonZero,
-                buttonOne,
-                buttonTwo,
-                buttonThree,
-                buttonFour,
-                buttonFive,
-                buttonSix,
-                buttonSeven,
-                buttonEight,
-                buttonNine,
-                buttonMultiplication,
-                buttonDivision,
-                buttonAddition,
-                buttonSubtraction,
-                buttonPercent,
-                buttonComma
+                buttonZero, buttonOne, buttonTwo, buttonThree, buttonFour, buttonFive, buttonSix, buttonSeven, buttonEight,
+                buttonNine, buttonMultiplication, buttonDivision, buttonAddition, buttonSubtraction, buttonPercent, buttonComma
             )
 
             buttons.forEach { button ->
@@ -69,21 +54,38 @@ class Main : ComponentActivity() {
 
     private fun validateCharactersInsertion(value: String, specialCharacter: Boolean) {
         when {
+            expression.checkExpressionSize() -> {
+                Toast.makeText(this@Main, "Limite de caracteres!", Toast.LENGTH_SHORT).show()
+            }
             specialCharacter && expression.lastCharacterIsSpecial() -> {
                 backspace()
                 insertExpressionCharacters(value)
             }
-
+            (value == ".") && validateCommaInsertion() -> { }
             isResult -> {
                 if (specialCharacter) insertExpressionCharacters(value)
                 else expression.fieldExpression = value
                 isResult = false
             }
-
             else -> insertExpressionCharacters(value)
         }
         binding.inputExpression.text = expression.fieldExpression
         calculateExpression()
+    }
+
+    private fun validateCommaInsertion(): Boolean {
+        var isComma = false
+        for (i in expression.fieldExpression.length - 1 downTo 0) {
+            when {
+                (expression.fieldExpression[i] == COMMA) -> {
+                    isComma = true
+                    break
+                }
+                (!expression.fieldExpression[i].toString().matches(Regex("[0-9.]*"))) -> break
+                else -> continue
+            }
+        }
+        return isComma
     }
 
     private fun insertExpressionCharacters(value: String) {
@@ -114,14 +116,12 @@ class Main : ComponentActivity() {
             }
         }
 
-        Toast.makeText(this@Main, "problema no char :(", Toast.LENGTH_SHORT).show()
         if (!expression.lastCharacterIsSpecial()) {
             when {
                 addSymbol -> {
                     val stringBuilder = StringBuilder(expression.fieldExpression)
                     expression.fieldExpression = stringBuilder.insert(position + 1, SUBTRACTION).toString()
                 }
-
                 changeSymbol -> {
                     val symbol = if (expression.fieldExpression[position] == ADDITION) SUBTRACTION else ADDITION
                     expression.fieldExpression = expression.fieldExpression.replaceRange(position, position + 1, symbol.toString())
@@ -151,14 +151,10 @@ class Main : ComponentActivity() {
                     ExpressionBuilder(expression.convertExpressionToCalculate()).build()
                 val result: Double = calculateExpression.evaluate()
                 val longResult: Long = result.toLong()
-
-                if (longResult > Long.MAX_VALUE || longResult < Long.MIN_VALUE || result > Double.MAX_VALUE || result < Double.MIN_VALUE) {
-                    Toast.makeText(this@Main, "Valor máximo suportado!", Toast.LENGTH_SHORT).show()
-                } else expression.fieldResult =
-                    if (result == longResult.toDouble()) longResult.toString() else result.toString()
+                expression.fieldResult = if (result == longResult.toDouble()) longResult.toString() else result.toString()
             }
         } catch (e: IllegalArgumentException) {
-            Toast.makeText(this@Main, "Formato de operação inválido.", Toast.LENGTH_SHORT).show()
+            Log.i("", "Formato de operação inválido!")
         } finally {
             binding.inputResult.text = expression.fieldResult
         }
