@@ -28,7 +28,7 @@ class Expression {
         return fieldExpression.replace(multiplication, "*").replace(division, "/").replace(percent, "/100*")
     }
 
-    fun checkExpressionSize() : Boolean {
+    fun isExpressionSizeOnLimit() : Boolean {
         return fieldExpression.length >= 50
     }
 }

@@ -55,7 +55,7 @@ class Main : ComponentActivity() {
 
     private fun validateCharactersInsertion(value: String, specialCharacter: Boolean) {
         when {
-            expression.checkExpressionSize() -> {
+            expression.isExpressionSizeOnLimit() -> {
                 Toast.makeText(this@Main, "Limite de caracteres!", Toast.LENGTH_SHORT).show()
             }
             specialCharacter && expression.lastCharacterIsSpecial() -> {
@@ -99,21 +99,18 @@ class Main : ComponentActivity() {
         var position = 0
 
         for (i in expression.fieldExpression.length - 1 downTo 0) {
-            if (
-                expression.fieldExpression[i] == PERCENT ||
-                expression.fieldExpression[i] == MULTIPLICATION ||
-                expression.fieldExpression[i] == DIVISION
-            ) {
-                addSymbol = true
-                position = i
-                break
-            } else if (
-                expression.fieldExpression[i] == ADDITION ||
-                expression.fieldExpression[i] == SUBTRACTION
-            ) {
-                changeSymbol = true
-                position = i
-                break
+            when {
+                expression.fieldExpression[i] == PERCENT || expression.fieldExpression[i] == MULTIPLICATION || expression.fieldExpression[i] == DIVISION -> {
+                    addSymbol = true
+                    position = i
+                    break
+                }
+
+                expression.fieldExpression[i] == ADDITION || expression.fieldExpression[i] == SUBTRACTION -> {
+                    changeSymbol = true
+                    position = i
+                    break
+                }
             }
         }
 
@@ -155,8 +152,7 @@ class Main : ComponentActivity() {
                 expression.fieldResult = if (result == longResult.toDouble()) longResult.toString() else result.toString()
             }
         } catch (e: Exception) {
-            if(e is ArithmeticException) Toast.makeText(this@Main, "Operação inválida.", Toast.LENGTH_SHORT).show()
-            else Log.i("", "Formato de operação inválido!")
+           Log.i("", "Formato de operação inválido!")
         } finally {
             binding.inputResult.text = expression.fieldResult
         }
