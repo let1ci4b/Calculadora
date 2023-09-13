@@ -1,6 +1,6 @@
 # 📱 Calculadora Android
 
-Calculadora mobile com operações básicas desenvolvida para Android na linguagem Kotlin, durante a prática do programa Jovem Aprendiz de programador.
+Calculadora mobile com operações básicas desenvolvida em Kotlin, durante a prática do programa Jovem Aprendiz de desenvolvedor Android.
 
 ### 👀 Pré-visualização:
 <img src="imgCalculadora.jpeg" height="400px">
