@@ -9,4 +9,4 @@ Calculadora mobile com operações básicas desenvolvida em Kotlin, durante a pr
 
 [Main Activity](app/src/main/java/com/example/calculadora/Main.kt)
 
-[XML da Main Activity](app/src/main/res/layout/mainlayout.xml)
+[Main Activity - layout](app/src/main/res/layout/mainlayout.xml)
